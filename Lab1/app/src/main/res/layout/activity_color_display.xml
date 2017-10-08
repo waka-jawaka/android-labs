@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="algie.lab1.color.ColorDisplayActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/colorDisplayPalette"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.66"/>
+
+        <SeekBar
+            android:id="@+id/rSeek"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.11" />
+
+        <SeekBar
+            android:id="@+id/gSeek"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.11" />
+
+        <SeekBar
+            android:id="@+id/bSeek"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.11" />
+    </LinearLayout>
+</RelativeLayout>
