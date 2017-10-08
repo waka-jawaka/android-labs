@@ -1,11 +1,17 @@
 package algie.lab1.notes;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +23,8 @@ import algie.lab1.R;
  */
 
 class NotesAdapter extends RecyclerView.Adapter<NoteHolder> {
+
+    private Context context;
 
     private List<Note> notesBackup;
 
@@ -81,13 +89,13 @@ class NotesAdapter extends RecyclerView.Adapter<NoteHolder> {
         notifyDataSetChanged();
     }
 
-    void addNote(String name, String desc, String imp) {
-        Note note = new Note(name, desc, R.drawable.note_image, 2, new Date());
+    void addNote(Note note) {
         notes.add(note);
         notifyDataSetChanged();
     }
 
     public NotesAdapter(Context context) {
+        this.context = context;
         loadNotes();
     }
 
@@ -100,9 +108,19 @@ class NotesAdapter extends RecyclerView.Adapter<NoteHolder> {
 
     @Override
     public void onBindViewHolder(final NoteHolder holder, int position) {
-        holder.nameTextView.setText(notes.get(position).getName());
-        holder.descriptionTextView.setText(notes.get(position).getDescription());
-        holder.datetimeTextView.setText(notes.get(position).getDatetime());
+        Note note = notes.get(position);
+        holder.nameTextView.setText(note.getName());
+        holder.descriptionTextView.setText(note.getDescription());
+        holder.datetimeTextView.setText(note.getDatetime());
+
+        if (note.getImagePath() != null) {
+            try {
+                Uri uri = Uri.parse(note.getImagePath());
+                final InputStream imageStream = context.getContentResolver().openInputStream(uri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                holder.imageView.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) { }
+        }
 
         Integer id = notes.get(position).getImpImageId();
         if (id != null) {

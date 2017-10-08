@@ -21,6 +21,7 @@ class NoteHolder extends RecyclerView.ViewHolder implements View.OnCreateContext
     TextView descriptionTextView;
     TextView datetimeTextView;
     ImageView importanceImageView;
+    ImageView imageView;
 
     NoteHolder(View v) {
         super(v);
@@ -31,6 +32,7 @@ class NoteHolder extends RecyclerView.ViewHolder implements View.OnCreateContext
         descriptionTextView = (TextView) v.findViewById(R.id.description_text_view);
         datetimeTextView = (TextView) v.findViewById(R.id.datetime_text_view);
         importanceImageView = (ImageView) v.findViewById(R.id.importance_image_view);
+        imageView = (ImageView) v.findViewById(R.id.image_view);
     }
 
     @Override

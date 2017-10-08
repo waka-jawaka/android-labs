@@ -6,6 +6,8 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/name_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -13,10 +15,14 @@
     <EditText
         android:id="@+id/writer_name_edit_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
 
     <TextView
         android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/importance_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -32,7 +38,9 @@
         android:text="@string/radio_0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:paddingLeft="10dp"
+        android:layout_weight="1"
+        android:checked="true"/>
 
     <RadioButton
         android:id="@+id/radio_1"
@@ -46,12 +54,15 @@
         android:text="@string/radio_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingRight="10dp"
         android:layout_weight="1" />
 
     </RadioGroup>
 
     <TextView
         android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/desc_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -59,7 +70,10 @@
     <EditText
         android:id="@+id/writer_desc_edit_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text=""
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
 
     
     <Button

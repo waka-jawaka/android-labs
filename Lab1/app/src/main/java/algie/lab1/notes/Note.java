@@ -15,7 +15,7 @@ class Note {
     private String description;
     private Integer impImageId;
     private int importance;
-    private Integer imageId;
+    private String imagePath;
     private String datetime;
 
     private SimpleDateFormat fmt;
@@ -28,10 +28,10 @@ class Note {
         }
     }
 
-    Note(String name, String description, Integer imageId, int imp, Date date) {
+    Note(String name, String description, String imagePath, int imp, Date date) {
         this.name = name;
         this.description = description;
-        this.imageId = imageId;
+        this.imagePath = imagePath;
         this.importance = imp;
 
         this.fmt = new SimpleDateFormat("d EEE HH:mm", Locale.getDefault());
@@ -52,11 +52,11 @@ class Note {
 
     public void setDescription(String desc) { this.description = desc; }
 
-    public Integer getImageId() {
-        return imageId;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageId(Integer imageId) { this.imageId = imageId; }
+    public void setImagePath(String imagePath) { this.imagePath = imagePath; }
 
     public int getImportance() { return importance; }
 

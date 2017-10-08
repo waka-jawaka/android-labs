@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Date;
+
 import algie.lab1.R;
 
 public class NotesActivity extends AppCompatActivity implements
@@ -92,11 +94,10 @@ public class NotesActivity extends AppCompatActivity implements
         if (requestCode == CREATE_NOTE && resultCode == RESULT_OK && null != data) {
             String name = data.getStringExtra(NoteWriterActivity.NAME_TAG);
             String desc = data.getStringExtra(NoteWriterActivity.DESC_TAG);
-            String imp = data.getStringExtra(NoteWriterActivity.IMP_TAG);
+            int imp = data.getIntExtra(NoteWriterActivity.IMP_TAG, 0);
             String imagePath = data.getStringExtra(NoteWriterActivity.IMAGE_TAG);
-            adapter.addNote(name, desc, imp);
-//            ImageView imageView = (ImageView) findViewById(R.id.imgView);
-//            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            Note note = new Note(name, desc, imagePath, imp, new Date());
+            adapter.addNote(note);
 
         }
     }
