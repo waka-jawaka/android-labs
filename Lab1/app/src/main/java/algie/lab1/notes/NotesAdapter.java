@@ -8,12 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import algie.lab1.R;
@@ -46,6 +44,10 @@ class NotesAdapter extends RecyclerView.Adapter<NoteHolder> {
     void deleteNote() {
         notes.remove(getPosition());
         notifyDataSetChanged();
+    }
+
+    Note getTappedNote() {
+        return notes.get(getPosition());
     }
 
     private void saveNotesBeforeFilter() {
@@ -125,6 +127,8 @@ class NotesAdapter extends RecyclerView.Adapter<NoteHolder> {
         Integer id = notes.get(position).getImpImageId();
         if (id != null) {
             holder.importanceImageView.setImageResource(id);
+        } else {
+            holder.importanceImageView.setImageResource(android.R.color.transparent);
         }
 
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {

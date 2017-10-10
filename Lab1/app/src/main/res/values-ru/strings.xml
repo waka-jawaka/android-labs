@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Лаба 1</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="slash">/</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="star">*</string>
+    <string name="dot">.</string>
+    <string name="equals">=</string>
+    <string name="clear">X</string>
+    <string name="title_activity_notes">Заметки</string>
+    <string name="radio_0">1</string>
+    <string name="radio_1">2</string>
+    <string name="radio_2">3</string>
+    <string name="desc_label">Описание</string>
+    <string name="importance_label">Важность</string>
+    <string name="name_label">Название</string>
+    <string name="load_image_label">Загрузить изображение</string>
+    <string name="note_create_label">Создать заметку</string>
+    <string name="activity_1_label">Задание 1</string>
+    <string name="activity_2_label">Задание 2</string>
+    <string name="activity_3_label">Задание 3</string>
+    <string name="filter_by_imp_label">Фильтр по важности</string>
+    <string name="filter_by_name_label">Фильтр по названию</string>
+    <string name="remove_filters_label">Убрать все фильтры</string>
+    <string name="hint">Введите слово для поиска</string>
+    <string name="ok">OK</string>
+    <string name="specify_name">Укажите название</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
+    <string name="context_menu_title">Выберите действие</string>
+    <string name="cancel">Отмена</string>
+</resources>

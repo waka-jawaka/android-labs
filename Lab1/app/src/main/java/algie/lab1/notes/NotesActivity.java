@@ -2,6 +2,7 @@ package algie.lab1.notes;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,9 +19,19 @@ public class NotesActivity extends AppCompatActivity implements
         NameFilterDialog.NameFilterDialogListener {
 
     public static int CREATE_NOTE = 1;
+    public static int EDIT_NOTE = 2;
 
     NotesAdapter adapter;
     RecyclerView recyclerView;
+
+    private void editNote(Note note) {
+        Intent intent = new Intent(this, NoteWriterActivity.class);
+        intent.putExtra(NoteWriterActivity.NAME_TAG, note.getName());
+        intent.putExtra(NoteWriterActivity.DESC_TAG, note.getDescription());
+        intent.putExtra(NoteWriterActivity.IMAGE_TAG, note.getImagePath());
+        intent.putExtra(NoteWriterActivity.IMP_TAG, note.getImportance());
+        startActivityForResult(intent, EDIT_NOTE);
+    }
 
     @Override
     public void filterByImportance(int imp) {
@@ -58,8 +69,12 @@ public class NotesActivity extends AppCompatActivity implements
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getTitle().toString()) {
-            case "Delete": adapter.deleteNote(); break;
+        String chosenAction = item.getTitle().toString();
+
+        if (chosenAction.equals(getResources().getString(R.string.delete))) {
+            adapter.deleteNote();
+        } else {
+            editNote(adapter.getTappedNote());
         }
         return super.onContextItemSelected(item);
     }
@@ -68,15 +83,16 @@ public class NotesActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         DialogFragment dialog;
+        Resources r = getResources();
 
         switch (itemId) {
             case R.id.filter_by_imp_item:
                 dialog = new ImportanceFilterDialog();
-                dialog.show(getFragmentManager(), "Filter by Importance");
+                dialog.show(getFragmentManager(), r.getString(R.string.filter_by_imp_label));
                 break;
             case R.id.filter_by_name_item:
                 dialog = new NameFilterDialog();
-                dialog.show(getFragmentManager(), "Filter by Name");
+                dialog.show(getFragmentManager(), r.getString(R.string.filter_by_name_label));
                 break;
             case R.id.remove_filters_item:
                 adapter.removeFilters();
@@ -98,7 +114,19 @@ public class NotesActivity extends AppCompatActivity implements
             String imagePath = data.getStringExtra(NoteWriterActivity.IMAGE_TAG);
             Note note = new Note(name, desc, imagePath, imp, new Date());
             adapter.addNote(note);
+        }
+        if (requestCode == EDIT_NOTE && resultCode == RESULT_OK && null != data) {
+            String name = data.getStringExtra(NoteWriterActivity.NAME_TAG);
+            String desc = data.getStringExtra(NoteWriterActivity.DESC_TAG);
+            int imp = data.getIntExtra(NoteWriterActivity.IMP_TAG, 0);
+            String imagePath = data.getStringExtra(NoteWriterActivity.IMAGE_TAG);
 
+            Note note = adapter.getTappedNote();
+            note.setName(name);
+            note.setDescription(desc);
+            note.setImportance(imp);
+            note.setImagePath(imagePath);
+            adapter.notifyDataSetChanged();
         }
     }
 }

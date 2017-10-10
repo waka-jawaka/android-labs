@@ -25,12 +25,30 @@ public class NoteWriterActivity extends AppCompatActivity {
     EditText nameEditText;
     EditText descEditText;
     RadioGroup radioGroup;
+    RadioButton radio0;
+    RadioButton radio1;
+    RadioButton radio2;
+
     String imagePath;
 
     public static String NAME_TAG = "NAME_TAG";
     public static String DESC_TAG = "DESC_TAG";
     public static String IMP_TAG = "IMP_TAG";
     public static String IMAGE_TAG = "IMAGE_TAG";
+
+    private void loadNoteInfo() {
+        Intent intent = getIntent();
+        nameEditText.setText(intent.getStringExtra(NAME_TAG));
+        descEditText.setText(intent.getStringExtra(DESC_TAG));
+        imagePath = intent.getStringExtra(IMAGE_TAG);
+
+        int imp = intent.getIntExtra(IMP_TAG, 0);
+        switch (imp) {
+            case 0: radio0.setChecked(true); break;
+            case 1: radio1.setChecked(true); break;
+            case 2: radio2.setChecked(true); break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +58,11 @@ public class NoteWriterActivity extends AppCompatActivity {
         nameEditText = (EditText) findViewById(R.id.writer_name_edit_text);
         descEditText = (EditText) findViewById(R.id.writer_desc_edit_text);
         radioGroup = (RadioGroup) findViewById(R.id.writer_radio_group);
+        radio0 = (RadioButton) findViewById(R.id.radio_0);
+        radio1 = (RadioButton) findViewById(R.id.radio_1);
+        radio2 = (RadioButton) findViewById(R.id.radio_2);
+
+        loadNoteInfo();
 
         loadImageButton = (Button) findViewById(R.id.load_image_button);
         loadImageButton.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +79,8 @@ public class NoteWriterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (nameEditText.getText() == null || nameEditText.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Specify name", Toast.LENGTH_LONG).show();
+                    String specifyName = getResources().getString(R.string.specify_name);
+                    Toast.makeText(getApplicationContext(), specifyName, Toast.LENGTH_LONG).show();
                     return;
                 }
 

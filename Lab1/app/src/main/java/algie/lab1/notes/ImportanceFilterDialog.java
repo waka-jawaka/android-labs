@@ -17,8 +17,8 @@ import algie.lab1.R;
 
 public class ImportanceFilterDialog extends DialogFragment {
 
-    public interface ImpFilterDialogListener {
-        public void filterByImportance(int importance);
+    interface ImpFilterDialogListener {
+        void filterByImportance(int importance);
     }
 
     ImpFilterDialogListener dialogListener;
@@ -38,12 +38,11 @@ public class ImportanceFilterDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         builder.setView(inflater.inflate(R.layout.dialogue_filter_importance, null))
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         Dialog d = ImportanceFilterDialog.this.getDialog();
 
-                        RadioButton radio0 = (RadioButton) d.findViewById(R.id.radio_0);
                         RadioButton radio1 = (RadioButton) d.findViewById(R.id.radio_1);
                         RadioButton radio2 = (RadioButton) d.findViewById(R.id.radio_2);
 
@@ -56,7 +55,7 @@ public class ImportanceFilterDialog extends DialogFragment {
                         dialogListener.filterByImportance(imp);
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         ImportanceFilterDialog.this.getDialog().cancel();
                     }

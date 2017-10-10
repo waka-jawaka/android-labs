@@ -1,9 +1,9 @@
 package algie.lab1.notes;
 
+import android.content.res.Resources;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,8 +37,9 @@ class NoteHolder extends RecyclerView.ViewHolder implements View.OnCreateContext
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        menu.setHeaderTitle("Select The Action");
-        menu.add(0, v.getId(), 0, "Delete");
-        menu.add(0, v.getId(), 0, "Edit");
+        Resources r = v.getResources();
+        menu.setHeaderTitle(r.getString(R.string.context_menu_title));
+        menu.add(0, v.getId(), 0, R.string.delete);
+        menu.add(0, v.getId(), 0, R.string.edit);
     }
 }

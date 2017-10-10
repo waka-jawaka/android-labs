@@ -33,4 +33,11 @@
     <string name="filter_by_name_label">Filter by name</string>
     <string name="remove_filters_label">Remove all filters</string>
     <string name="hint">Enter search pattern</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="context_menu_title">Select The Action</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="specify_name">Specify name</string>
 </resources>

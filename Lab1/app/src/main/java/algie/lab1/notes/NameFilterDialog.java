@@ -17,8 +17,8 @@ import algie.lab1.R;
 
 public class NameFilterDialog extends DialogFragment {
 
-    public interface NameFilterDialogListener {
-        public void filterByName(String name);
+    interface NameFilterDialogListener {
+        void filterByName(String name);
     }
 
     NameFilterDialogListener dialogListener;
@@ -38,7 +38,7 @@ public class NameFilterDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         builder.setView(inflater.inflate(R.layout.dialogue_filter_name, null))
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         Dialog d = NameFilterDialog.this.getDialog();
@@ -47,7 +47,7 @@ public class NameFilterDialog extends DialogFragment {
                         dialogListener.filterByName(editText.getText().toString());
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         NameFilterDialog.this.getDialog().cancel();
                     }
