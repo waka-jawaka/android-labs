@@ -1,5 +1,8 @@
 package algie.lab1.notes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -10,7 +13,7 @@ import algie.lab1.R;
  * Created by me on 03.10.17.
  */
 
-class Note {
+class Note implements Parcelable {
     private String name;
     private String description;
     private Integer impImageId;
@@ -76,4 +79,42 @@ class Note {
     public Integer getImpImageId() {
         return impImageId;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.description);
+        dest.writeValue(this.impImageId);
+        dest.writeInt(this.importance);
+        dest.writeString(this.imagePath);
+        dest.writeString(this.datetime);
+        dest.writeSerializable(this.fmt);
+    }
+
+    protected Note(Parcel in) {
+        this.name = in.readString();
+        this.description = in.readString();
+        this.impImageId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.importance = in.readInt();
+        this.imagePath = in.readString();
+        this.datetime = in.readString();
+        this.fmt = (SimpleDateFormat) in.readSerializable();
+    }
+
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel source) {
+            return new Note(source);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
 }

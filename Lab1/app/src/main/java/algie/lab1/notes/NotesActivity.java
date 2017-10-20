@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import algie.lab1.R;
@@ -18,11 +19,19 @@ public class NotesActivity extends AppCompatActivity implements
         ImportanceFilterDialog.ImpFilterDialogListener,
         NameFilterDialog.NameFilterDialogListener {
 
-    public static int CREATE_NOTE = 1;
-    public static int EDIT_NOTE = 2;
+    private static int CREATE_NOTE = 1;
+    private static int EDIT_NOTE = 2;
+
+    private static String PARCE_SAVE = "notes";
 
     NotesAdapter adapter;
     RecyclerView recyclerView;
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putParcelableArrayList(PARCE_SAVE, (ArrayList<Note>)adapter.notes);
+    }
 
     private void editNote(Note note) {
         Intent intent = new Intent(this, NoteWriterActivity.class);
@@ -52,11 +61,15 @@ public class NotesActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
-
+        ArrayList<Note> notes = null;
+        try {
+            notes = savedInstanceState.getParcelableArrayList(PARCE_SAVE);
+            adapter = new NotesAdapter(this, notes);
+        } catch (NullPointerException e) {
+            adapter = new NotesAdapter(this);
+        }
         recyclerView = (RecyclerView) findViewById(R.id.notes_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        adapter = new NotesAdapter(this);
         recyclerView.setAdapter(adapter);
         registerForContextMenu(recyclerView);
     }

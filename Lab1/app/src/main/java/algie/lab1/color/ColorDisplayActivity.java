@@ -1,8 +1,8 @@
 package algie.lab1.color;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -23,7 +23,6 @@ public class ColorDisplayActivity extends AppCompatActivity {
     }
 
     private void initializeSeekBar(SeekBar seekBar) {
-        seekBar.setMax(0);
         seekBar.setMax(255);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

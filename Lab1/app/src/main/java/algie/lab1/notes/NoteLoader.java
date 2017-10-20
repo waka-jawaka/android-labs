@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import algie.lab1.R;
-
 /**
  * Created by me on 03.10.17.
  */

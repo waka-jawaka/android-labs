@@ -26,7 +26,7 @@ class NotesAdapter extends RecyclerView.Adapter<NoteHolder> {
 
     private List<Note> notesBackup;
 
-    private List<Note> notes = new ArrayList<>();
+    List<Note> notes = new ArrayList<>();
     private int position;
 
     private void loadNotes() {
@@ -101,10 +101,14 @@ class NotesAdapter extends RecyclerView.Adapter<NoteHolder> {
         loadNotes();
     }
 
+    public NotesAdapter(Context context, List<Note> notes) {
+        this.context = context;
+        this.notes = notes;
+    }
+
     @Override
     public NoteHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_view, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view, parent, false);
         return new NoteHolder(v);
     }
 
