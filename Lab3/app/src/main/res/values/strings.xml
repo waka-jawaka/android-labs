@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Lab 3</string>
+    <string name="title_activity_notes">NotesActivity</string>
+    <string name="radio_0">1</string>
+    <string name="radio_1">2</string>
+    <string name="radio_2">3</string>
+    <string name="desc_label">Description</string>
+    <string name="importance_label">Importance</string>
+    <string name="name_label">Name</string>
+    <string name="load_image_label">Load image</string>
+    <string name="note_create_label">Create note</string>
+    <string name="filter_by_imp_label">Filter by importance</string>
+    <string name="filter_by_name_label">Filter by name</string>
+    <string name="remove_filters_label">Remove all filters</string>
+    <string name="hint">Enter search pattern</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="context_menu_title">Select The Action</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="specify_name">Specify name</string>
+</resources>
