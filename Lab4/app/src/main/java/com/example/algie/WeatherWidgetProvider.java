@@ -1,5 +1,6 @@
 package com.example.algie;
 
+import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -26,15 +27,48 @@ public class WeatherWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        context.startService(new Intent(context, UpdateService.class));
+        ComponentName thisWidget = new ComponentName(context,
+                WeatherWidgetProvider.class);
+        int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+        Intent intent = new Intent(context.getApplicationContext(),
+                UpdateService.class);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allWidgetIds);
+        context.startService(intent);
     }
 
     public static class UpdateService extends Service {
-    	
+
         @Override
-        public int onStartCommand(Intent intent, int flags, int startId) {
-            buildUpdate(this);
-            return START_STICKY;
+        public void onStart(Intent intent, int startId) {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this
+                    .getApplicationContext());
+
+            int[] allWidgetIds = intent
+                    .getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+
+            for (int widgetId : allWidgetIds) {
+                buildUpdate(getApplicationContext());
+
+                RemoteViews remoteViews = new RemoteViews(this
+                        .getApplicationContext().getPackageName(),
+                        R.layout.example_appwidget);
+
+                Intent clickIntent = new Intent(this.getApplicationContext(),
+                        WeatherWidgetProvider.class);
+
+                clickIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,
+                        allWidgetIds);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        getApplicationContext(), 0, clickIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+                remoteViews.setOnClickPendingIntent(R.id.layout, pendingIntent);
+                appWidgetManager.updateAppWidget(widgetId, remoteViews);
+            }
+            stopSelf();
+
+            super.onStart(intent, startId);
         }
 
         private static WeatherInfo parseResponse (String response) {
@@ -85,7 +119,7 @@ public class WeatherWidgetProvider extends AppWidgetProvider {
 
                             views = new RemoteViews(UpdateService.this.getPackageName(), R.layout.example_appwidget);
 
-                            Log.i("INFO", info.humidity);
+                            Log.i("INFO", info.wind);
                             views.setTextViewText(R.id.textViewTemp, info.temperature + (char) 0x00B0 + "F");
                             views.setTextViewText(R.id.textViewPressure, "Pressure: " + info.pressure + " in");
                             views.setTextViewText(R.id.textViewHumidity, "Humidity: " + info.humidity + "%");
